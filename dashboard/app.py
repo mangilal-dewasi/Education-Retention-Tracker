@@ -299,8 +299,25 @@ nav_page = st.radio(
 )
 
 # Global Administrative Filter Controls
-districts_list = ['All Districts'] + conn.execute("SELECT DISTINCT district FROM dim_school WHERE district IS NOT NULL ORDER BY district").df()['district'].tolist()
-school_types = ['All Types'] + conn.execute("SELECT DISTINCT school_type FROM dim_school WHERE school_type IS NOT NULL ORDER BY school_type").df()['school_type'].tolist()
+districts_list = ['All Districts'] + [
+    row[0]
+    for row in conn.execute("""
+        SELECT DISTINCT district
+        FROM dim_school
+        WHERE district IS NOT NULL
+        ORDER BY district
+    """).fetchall()
+]
+
+school_types = ['All Types'] + [
+    row[0]
+    for row in conn.execute("""
+        SELECT DISTINCT school_type
+        FROM dim_school
+        WHERE school_type IS NOT NULL
+        ORDER BY school_type
+    """).fetchall()
+]
 
 with st.container():
     st.markdown('<div class="filter-panel">', unsafe_allow_html=True)
