@@ -1,15 +1,17 @@
 import os
 import duckdb
+from pathlib import Path
 
-DB_PATH = r"C:\Users\mangi\Desktop\Datathon\data\processed\education_warehouse.duckdb"
-PROCESSED_DIR = r"C:\Users\mangi\Desktop\Datathon\data\processed"
-SQL_DIR = r"C:\Users\mangi\Desktop\Datathon\sql"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DB_PATH = PROJECT_ROOT / "data" / "processed" / "education_warehouse.duckdb"
+PROCESSED_DIR = PROJECT_ROOT / "data" / "processed" 
+SQL_DIR = PROJECT_ROOT / "sql
 
 def get_duckdb_connection(db_path=DB_PATH):
     """
     Returns an active DuckDB connection, initializing tables and views if needed.
     """
-    conn = duckdb.connect(db_path)
+    conn = duckdb.connect(str(db_path), read_only=True)
     return conn
 
 def initialize_warehouse(db_path=DB_PATH):
