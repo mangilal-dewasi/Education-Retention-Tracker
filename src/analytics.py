@@ -5,7 +5,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / "data" / "processed" / "education_warehouse.duckdb"
 PROCESSED_DIR = PROJECT_ROOT / "data" / "processed" 
-SQL_DIR = PROJECT_ROOT / "sql
+SQL_DIR = PROJECT_ROOT / "sql"
 
 def get_duckdb_connection(db_path=DB_PATH):
     """
